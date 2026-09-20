@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hand Cricket League (HPL) - Official Records</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-badge">HPL</span>
+      <span>HAND CRICKET LEAGUE</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#teams">Teams &amp; Stadiums</a></li>
+      <li><a href="#points-table">Points Table</a></li>
+      <li><a href="#matches">S11 Matches</a></li>
+      <li><a href="#players">Players &amp; Records</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="hero">
+    <h1>🏏 HAND CRICKET LEAGUE (HPL)</h1>
+    <p class="subtitle">Official League Portal • Season 11 Stats &amp; All-Time Career Records</p>
+  </header>
+
+  <main class="container">
+
+    <!-- Teams & Stadiums -->
+    <section id="teams" class="section-block">
+      <h2 class="section-title">🏟️ Teams &amp; International Home Grounds</h2>
+      <div class="team-grid">
+        <div class="team-card rk-theme">
+          <h3>👑 Royal King's</h3>
+          <p><strong>Captain:</strong> Sanjay</p>
+          <p><strong>Home Ground:</strong> M. Chinnaswamy Stadium, Bengaluru</p>
+        </div>
+        <div class="team-card titans-theme">
+          <h3>⚡ Titans</h3>
+          <p><strong>Captain:</strong> Yashas</p>
+          <p><strong>Home Ground:</strong> Narendra Modi Stadium, Ahmedabad</p>
+        </div>
+        <div class="team-card chasers-theme">
+          <h3>🦁 Chasers</h3>
+          <p><strong>Captain:</strong> Likith</p>
+          <p><strong>Home Ground:</strong> Rajiv Gandhi International Stadium, Hyderabad</p>
+        </div>
+        <div class="team-card stars-theme">
+          <h3>⭐ Stars</h3>
+          <p><strong>Captain:</strong> Karan</p>
+          <p><strong>Home Ground:</strong> Sawai Mansingh Stadium, Jaipur</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Points Table -->
+    <section id="points-table" class="section-block">
+      <h2 class="section-title">📊 Season 11 Points Table</h2>
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team</th>
+              <th>Played</th>
+              <th>Won</th>
+              <th>Lost</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="standings-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Season 11 Matches -->
+    <section id="matches" class="section-block">
+      <h2 class="section-title">📅 Season 11 Match Results</h2>
+      <div class="match-grid" id="matches-container"></div>
+    </section>
+
+    <!-- Players Section -->
+    <section id="players" class="section-block">
+      <div class="player-header-flex">
+        <h2 class="section-title">👥 Player Profiles &amp; Career Records</h2>
+        <div class="filter-controls">
+          <label for="team-filter">Filter by Team: </label>
+          <select id="team-filter">
+            <option value="ALL">All Teams</option>
+            <option value="Royal King's">Royal King's</option>
+            <option value="Titans">Titans</option>
+            <option value="Chasers">Chasers</option>
+            <option value="Stars">Stars</option>
+          </select>
+        </div>
+      </div>
+      <div class="profile-grid" id="players-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Hand Cricket League (HPL). Official League Database.</p>
+  </footer>
+
+  <script>
+    // Points Table Data
+    const standingsData = [
+      { rank: 1, team: "Royal King's", p: 3, w: 2, l: 1, pts: 4 },
+      { rank: 2, team: "Titans", p: 3, w: 2, l: 1, pts: 4 },
+      { rank: 3, team: "Chasers", p: 3, w: 2, l: 1, pts: 4 },
+      { rank: 4, team: "Stars", p: 4, w: 1, l: 3, pts: 2 }
+    ];
+
+    // Season 11 Matches Data
+    const matchesData = [
+      { num: "Match 1", t1: "Titans 222/3", t2: "Chasers 219/5", result: "Titans won by 2 wickets", details: "Vishnu 165, S.Gill 36 | Prajwal P.K 70, J.Root 49" },
+      { num: "Match 2", t1: "Stars 126/5", t2: "Royal Kings 134/2", result: "Royal Kings won by 3 wickets", details: "Sanjay 40, Bethell 56* | Mohith 42, Karan 31" },
+      { num: "Match 3", t1: "Royal Kings 222/5", t2: "Chasers 230/4", result: "Chasers won by 1 wicket", details: "Vaibhav 176*, J.Root 34 | Sanjay 94, Bethell 60" },
+      { num: "Match 4", t1: "Titans 251/5", t2: "Royal Kings 135/5", result: "Titans won by 116 runs", details: "Yashas 124, Vishnu 46, S.Gill 32 | Sanjay 62, Bethell 31" },
+      { num: "Match 5", t1: "Titans 34/5", t2: "Stars 39/1", result: "Stars won by 4 wickets", details: "Karan 31 & 5w, Mohith 8* | Manav 12, S.Gill 8" },
+      { num: "Match 6", t1: "Chasers 238/5", t2: "Stars 170/5", result: "Chasers won by 68 runs", details: "Vaibhav 139, Prajwal P.K 73 | Karan 43 & 5w, M.Siraj 37" },
+      { num: "Match 7", t1: "Stars 235/5", t2: "Royal Kings 240/2", result: "Royal Kings won by 3 wickets", details: "Sanjay 206*, Bethell 34 | Bumrah 97, Mohith 63, Karan 55" }
+    ];
+
+    // Players Complete Records Data
+    const playersData = [
+      // Royal King's
+      {
+        name: "Sanjay", jersey: "#02", team: "Royal King's", ground: "M. Chinnaswamy Stadium, Bengaluru",
+        role: "All-Rounder (Captain)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "Mandya, Karnataka",
+        icon: "👑", badgeColor: "#eab308",
+        baseMatches: 110, baseRuns: 6284, baseHighest: 247, base50s: 25, base100s: 22, baseOuts: 91,
+        s11Matches: 4, s11Runs: 402, s11Highest: "206*", s1150s: 1, s11100s: 1, s11Outs: 3
+      },
+      {
+        name: "Dharshan", jersey: "#46", team: "Royal King's", ground: "M. Chinnaswamy Stadium, Bengaluru",
+        role: "All-Rounder", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "Tumakuru, Karnataka",
+        icon: "⚡", badgeColor: "#eab308",
+        baseMatches: 111, baseRuns: 5638, baseHighest: 368, base50s: 25, base100s: 17, baseOuts: 84,
+        s11Matches: 4, s11Runs: 42, s11Highest: "38", s1150s: 0, s11100s: 0, s11Outs: 4
+      },
+      {
+        name: "Jacob Bethell", jersey: "#17", team: "Royal King's", ground: "M. Chinnaswamy Stadium, Bengaluru",
+        role: "All-Rounder (International)", batStyle: "Left Hand Bat", bowlStyle: "Slow Left Arm Orthodox", place: "England",
+        icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", badgeColor: "#eab308",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 4, s11Runs: 181, s11Highest: "60", s1150s: 2, s11100s: 0, s11Outs: 3
+      },
+      {
+        name: "Jasprit Bumrah (RK)", jersey: "#93", team: "Royal King's", ground: "M. Chinnaswamy Stadium, Bengaluru",
+        role: "Fast Bowler (International)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "India",
+        icon: "🎯", badgeColor: "#eab308",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 4, s11Runs: 45, s11Highest: "34", s1150s: 0, s11100s: 0, s11Outs: 2
+      },
+
+      // Titans
+      {
+        name: "Yashas", jersey: "#07", team: "Titans", ground: "Narendra Modi Stadium, Ahmedabad",
+        role: "All-Rounder (Captain)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "Hassan, Karnataka",
+        icon: "👑", badgeColor: "#3b82f6",
+        baseMatches: 112, baseRuns: 7025, baseHighest: 307, base50s: 26, base100s: 25, baseOuts: 68,
+        s11Matches: 3, s11Runs: 148, s11Highest: "124", s1150s: 0, s11100s: 1, s11Outs: 3
+      },
+      {
+        name: "Vishnu", jersey: "#18", team: "Titans", ground: "Narendra Modi Stadium, Ahmedabad",
+        role: "Top-Order Batter", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Off Spin", place: "Chitradurga, Karnataka",
+        icon: "🛡️", badgeColor: "#3b82f6",
+        baseMatches: 95, baseRuns: 4335, baseHighest: 238, base50s: 18, base100s: 17, baseOuts: 73,
+        s11Matches: 3, s11Runs: 211, s11Highest: "165", s1150s: 0, s11100s: 1, s11Outs: 3
+      },
+      {
+        name: "Shubman Gill", jersey: "#77", team: "Titans", ground: "Narendra Modi Stadium, Ahmedabad",
+        role: "Top-Order Batter (International)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Off Break", place: "India",
+        icon: "🏏", badgeColor: "#3b82f6",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 3, s11Runs: 76, s11Highest: "36", s1150s: 0, s11100s: 0, s11Outs: 3
+      },
+
+      // Chasers
+      {
+        name: "Likith", jersey: "#18", team: "Chasers", ground: "Rajiv Gandhi International Stadium, Hyderabad",
+        role: "All-Rounder (Captain)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "Karnataka, India",
+        icon: "🦁", badgeColor: "#10b981",
+        baseMatches: 115, baseRuns: 6266, baseHighest: 386, base50s: 18, base100s: 19, baseOuts: 94,
+        s11Matches: 3, s11Runs: 30, s11Highest: "21", s1150s: 0, s11100s: 0, s11Outs: 3
+      },
+      {
+        name: "Prajwal P.K", jersey: "#10", team: "Chasers", ground: "Rajiv Gandhi International Stadium, Hyderabad",
+        role: "Top-Order Batter", batStyle: "Right Hand Bat", bowlStyle: "-", place: "Karnataka, India",
+        icon: "🏏", badgeColor: "#10b981",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 3, s11Runs: 143, s11Highest: "73", s1150s: 2, s11100s: 0, s11Outs: 3
+      },
+      {
+        name: "Joe Root", jersey: "#66", team: "Chasers", ground: "Rajiv Gandhi International Stadium, Hyderabad",
+        role: "Top-Order Batter (International)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Off Break", place: "England",
+        icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", badgeColor: "#10b981",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 3, s11Runs: 100, s11Highest: "49", s1150s: 0, s11100s: 0, s11Outs: 3
+      },
+      {
+        name: "Vaibhav", jersey: "#09", team: "Chasers", ground: "Rajiv Gandhi International Stadium, Hyderabad",
+        role: "Middle-Order Finisher", batStyle: "Right Hand Bat", bowlStyle: "-", place: "India",
+        icon: "🔥", badgeColor: "#10b981",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 3, s11Runs: 435, s11Highest: "176*", s1150s: 0, s11100s: 2, s11Outs: 2
+      },
+
+      // Stars
+      {
+        name: "Mohith", jersey: "#44", team: "Stars", ground: "Sawai Mansingh Stadium, Jaipur",
+        role: "Middle-Order Batter", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Off Spin", place: "Bihar, India",
+        icon: "⭐", badgeColor: "#f97316",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 4, s11Runs: 142, s11Highest: "63", s1150s: 1, s11100s: 0, s11Outs: 3
+      },
+      {
+        name: "Karan", jersey: "-", team: "Stars", ground: "Sawai Mansingh Stadium, Jaipur",
+        role: "All-Rounder (Captain)", batStyle: "Right Hand Bat", bowlStyle: "Left Arm Medium Fast", place: "Rajasthan, India",
+        icon: "⭐", badgeColor: "#f97316",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 4, s11Runs: 160, s11Highest: "55", s1150s: 1, s11100s: 0, s11Outs: 4, s11Wickets: 14
+      },
+      {
+        name: "Mohammed Siraj", jersey: "#13", team: "Stars", ground: "Sawai Mansingh Stadium, Jaipur",
+        role: "Fast Bowler (International)", batStyle: "Right Hand Bat", bowlStyle: "Right Arm Fast", place: "India",
+        icon: "🎯", badgeColor: "#f97316",
+        baseMatches: 0, baseRuns: 0, baseHighest: 0, base50s: 0, base100s: 0, baseOuts: 0,
+        s11Matches: 4, s11Runs: 139, s11Highest: "97", s1150s: 1, s11100s: 0, s11Outs: 4
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Standings
+      document.getElementById("standings-body").innerHTML = standingsData.map(s => `
+        <tr>
+          <td><strong>${s.rank}</strong></td>
+          <td>${s.team}</td>
+          <td>${s.p}</td>
+          <td>${s.w}</td>
+          <td>${s.l}</td>
+          <td><strong>${s.pts}</strong></td>
+        </tr>
+      `).join("");
+
+      // Matches
+      document.getElementById("matches-container").innerHTML = matchesData.map(m => `
+        <div class="match-card">
+          <div class="match-head">
+            <span>${m.num}</span>
+            <span>HPL S11</span>
+          </div>
+          <div class="match-score">${m.t1}</div>
+          <div class="match-score">${m.t2}</div>
+          <div class="match-winner">${m.result}</div>
+          <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Top: ${m.details}</div>
+        </div>
+      `).join("");
+
+      // Players
+      renderPlayers("ALL");
+      document.getElementById("team-filter").addEventListener("change", (e) => renderPlayers(e.target.value));
+    });
+
+    function renderPlayers(filterTeam) {
+      const container = document.getElementById("players-container");
+      container.innerHTML = "";
+
+      const filtered = filterTeam === "ALL" ? playersData : playersData.filter(p => p.team === filterTeam);
+
+      filtered.forEach(p => {
+        const totalMatches = p.baseMatches + p.s11Matches;
+        const totalRuns = p.baseRuns + p.s11Runs;
+        const total50s = p.base50s + p.s1150s;
+        const total100s = p.base100s + p.s11100s;
+        const s11NumHS = parseInt(p.s11Highest);
+        const totalHighest = Math.max(p.baseHighest, isNaN(s11NumHS) ? 0 : s11NumHS);
+        const totalOuts = p.baseOuts + p.s11Outs;
+        const totalAvg = totalOuts > 0 ? (totalRuns / totalOuts).toFixed(1) : totalRuns;
+
+        // Custom stylized graphic avatar card (no external image needed)
+        const card = document.createElement("div");
+        card.className = "player-card";
+        card.innerHTML = `
+          <div class="avatar-card-banner" style="background: radial-gradient(circle, ${p.badgeColor}22 0%, #0f172a 100%); border-bottom: 2px solid ${p.badgeColor};">
+            <div class="avatar-circle" style="border-color: ${p.badgeColor};">${p.icon}</div>
+            <div class="avatar-player-name">${p.name}</div>
+            <div class="avatar-jersey">${p.jersey !== '-' ? p.jersey : 'PRO'}</div>
+          </div>
+          <div class="card-head">
+            <h3>${p.name}</h3>
+            <span class="badge" style="background-color: ${p.badgeColor};">${p.team}</span>
+          </div>
+          <ul class="info-list">
+            <li>Home Ground: <span>${p.ground}</span></li>
+            <li>Role: <span>${p.role}</span></li>
+            <li>Bowling Style: <span>${p.bowlStyle}</span></li>
+            <li>Place: <span>${p.place}</span></li>
+          </ul>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>M</th>
+                <th>Runs</th>
+                <th>HS</th>
+                <th>Avg</th>
+                <th>50/100</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Season 11</td>
+                <td>${p.s11Matches}</td>
+                <td>${p.s11Runs}${p.s11Wickets ? ` (${p.s11Wickets}w)` : ''}</td>
+                <td>${p.s11Highest}</td>
+                <td>${(p.s11Runs / (p.s11Outs || 1)).toFixed(1)}</td>
+                <td>${p.s1150s} / ${p.s11100s}</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>HPL Total</td>
+                <td>${totalMatches}</td>
+                <td>${totalRuns}</td>
+                <td>${totalHighest}</td>
+                <td>${totalAvg}</td>
+                <td>${total50s} / ${total100s}</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
