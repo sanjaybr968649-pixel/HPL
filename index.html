@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110d">
+  <title>HPL — Hand Cricket Premier League</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="welcome" class="welcome-screen">
+    <div class="glow"></div>
+    <div class="welcome-content">
+      <div class="logo-stage"><div class="energy-ring"></div><div class="cricket-ball" aria-hidden="true"></div><img class="welcome-logo" src="./assets/hpl-logo.png" alt="HPL Logo"></div>
+      <p class="eyebrow">HAND CRICKET PREMIER LEAGUE</p>
+      <h1>WELCOME TO <span>HPL</span></h1>
+      <p class="welcome-sub">SEASON 11 • THE GAME OF HAND CRICKET</p><div class="star-player"><img src="./assets/star-player.png" alt="Cricket stars with HPL branding"></div>
+      <button id="enterBtn" class="gold-btn">ENTER HPL</button><button id="skipBtn" class="skip-btn">SKIP INTRO</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#home"><img src="./assets/hpl-logo.png" alt="HPL"><span>HPL</span></a>
+    <nav id="nav">
+      <a href="#home">Home</a><a href="#matches">Matches</a><a href="#season">Season 11</a>
+      <a href="#teams">Teams</a><a href="#players">Players</a><a href="#stats">Stats</a><a href="#records">Records</a>
+    </nav>
+    <button id="menuBtn" class="menu-btn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div><span class="tag">HPL PRESENT LIVE SEASON</span><h2>Season 11</h2><p>Hand Cricket Premier League — match centre, teams, players and records.</p><div class="actions"><a class="gold-btn" href="#season">Open Season 11</a><a class="ghost-btn" href="#matches">View Matches</a></div></div>
+      <div class="hero-card"><img src="./assets/hpl-logo.png" alt="HPL"><strong>HPL 11</strong><small>HAND CRICKET PREMIER LEAGUE</small></div>
+    </section>
+
+    <section id="matches" class="section"><div class="section-head"><div><span class="tag">MATCH CENTRE</span><h2>Season 11 Matches</h2></div></div><div id="matchesGrid" class="cards"></div></section>
+
+    <section id="season" class="section dark-panel"><span class="tag">HPL PRESENT LIVE SEASON</span><h2>Season 11 Dashboard</h2><div class="quick-grid"><a href="#matches">Live / Results</a><a href="#teams">Teams</a><a href="#players">Players</a><a href="#stats">Stats</a><a href="#records">Records</a><a href="#matches">Schedule</a></div></section>
+
+    <section id="teams" class="section"><span class="tag">SEASON 11</span><h2>Teams</h2><div id="teamsGrid" class="team-grid"></div></section>
+
+    <section id="players" class="section dark-panel"><span class="tag">PLAYER CENTRE</span><h2>Players</h2><div class="filter-row"><input id="playerSearch" placeholder="Search player..." autocomplete="off"><select id="teamFilter"><option value="all">All teams</option></select></div><div id="playersGrid" class="player-grid"></div></section>
+
+    <section id="stats" class="section"><span class="tag">SEASON 11</span><h2>Stats</h2><div class="stats-grid"><div><b>Most Runs</b><strong id="mostRuns">—</strong></div><div><b>Most Wickets</b><strong id="mostWickets">—</strong></div><div><b>Highest Score</b><strong id="highestScore">—</strong></div><div><b>Best Bowling</b><strong>—</strong></div><div><b>Most 100s</b><strong>—</strong></div><div><b>Most 50s</b><strong>—</strong></div><div><b>Best Average</b><strong>—</strong></div><div><b>Highest Individual Runs</b><strong id="highestRuns">—</strong></div></div></section>
+
+    <section id="records" class="section dark-panel"><span class="tag">HPL HISTORY</span><h2>All-Time Records</h2><div class="record-list"><div><span>Most Runs</span><b>Season-by-season database ready</b></div><div><span>Highest Individual Score</span><b>Match + season linked</b></div><div><span>Most Wickets</span><b>Career aggregate ready</b></div><div><span>Most Titles</span><b>Team history ready</b></div></div></section>
+  </main>
+
+  <div id="modal" class="modal hidden"><div class="modal-box"><button id="closeModal" class="close">×</button><div id="modalBody"></div></div></div>
+  <footer>© HPL — Hand Cricket Premier League • Static GitHub Pages build</footer>
+  <script src="./data.js"></script><script src="./app.js"></script>
+</body>
+</html>
